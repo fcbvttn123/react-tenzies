@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #0B2434;
+    padding: 20px;
+    font-family: 'Karla', sans-serif;
+}
+
+main {
+    background-color: #F5F5F5;
+    height: 400px;
+    max-width: 800px;
+    border-radius: 5px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.die-container {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.die-face {
+    background-color: FFFFFF;
+    box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+
+    width: 35.84px;
+    aspect-ratio: 1/1;
+
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.die-num {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
