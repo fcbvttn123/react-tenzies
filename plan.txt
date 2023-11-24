@@ -1,0 +1,13 @@
++ Click Event on Die element
+
+    + Color the die to green 
+
+    + Die remains the same for the next rolls 
+
+    + If the die clicked is the last element 
+
+        + If all dice are the same --> change button from "Roll" to "Reset Game"
+
++ Click Event on Roll Button
+
+    + Update dice  
