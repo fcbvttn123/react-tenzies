@@ -6,21 +6,34 @@ import './App.css'
 import { Die } from './components/Die'
 
 function App() {
-  const [allNewDice, setAllNewDice] = useState(generateRandomNumbers())
+  const [allNewDice, setAllNewDice] = useState(generateInitialDieArray())
 
-  function generateRandomNumbers() {
-    const randomNumbers = [];
+  function generateInitialDieArray() {
+    const initialDieArray = [];
     for (let i = 0; i < 10; i++) {
         const randomNumber = Math.floor(Math.random() * 6) + 1;
-        randomNumbers.push(randomNumber);
+        initialDieArray.push({
+          value: randomNumber,
+          isGreen: false
+        });
     }
-    return randomNumbers;
+    return initialDieArray;
+  }
+
+  function dieClicked(dieId) {
+    setAllNewDice(prev => prev.map((e, i) => {
+      if(i == dieId) {
+        return {...e, isGreen: !e.isGreen}
+      } else {
+        return {...e}
+      }
+    }))
   }
 
   return (
     <main>
       <div className='die-container'>
-        {allNewDice.map((e, i) => <Die key={i} value={e}/>)}
+        {allNewDice.map((arrElement, i) => <Die key={i} value={arrElement.value} dieClicked={dieClicked} dieId={i} isGreen={arrElement.isGreen}/>)}
       </div>
     </main>
   )
