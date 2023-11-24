@@ -19,6 +19,8 @@ main {
     padding: 20px;
 
     display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
     align-items: center;
     justify-content: center;
 }
@@ -51,4 +53,13 @@ main {
 .die-num {
     font-weight: 700;
     font-size: 1.2rem;
+}
+
+main button {
+    padding: 1.5rem 3.5rem;
+    background-color: #5035FF;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: .5rem;
+    cursor: pointer;
 }
