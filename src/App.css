@@ -11,6 +11,8 @@ body {
     font-family: 'Karla', sans-serif;
 }
 
+/* Main Section */
+
 main {
     background-color: #F5F5F5;
     height: 400px;
@@ -19,9 +21,13 @@ main {
     padding: 20px;
 
     display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
     align-items: center;
     justify-content: center;
 }
+
+/* Dice Container - First Child of Main section */
 
 .die-container {
     width: 80%;
@@ -47,4 +53,16 @@ main {
 .die-num {
     font-weight: 700;
     font-size: 1.2rem;
+}
+
+/* Button - Second Child of Main section */
+
+main button {
+    background-color: #5035FF;
+    color: white;
+
+    padding: .8rem 2.5rem;
+    border-radius: 5px;
+
+    cursor: pointer;
 }

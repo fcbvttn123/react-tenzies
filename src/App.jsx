@@ -1,27 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 import { Die } from './components/Die'
 
 function App() {
-  const [allNewDice, setAllNewDice] = useState(generateRandomNumbers())
-
-  function generateRandomNumbers() {
-    const randomNumbers = [];
-    for (let i = 0; i < 10; i++) {
-        const randomNumber = Math.floor(Math.random() * 6) + 1;
-        randomNumbers.push(randomNumber);
+  const [dice, setDice] = useState(allNewDice())
+    
+    function allNewDice() {
+        const newDice = []
+        for (let i = 0; i < 10; i++) {
+            newDice.push(Math.ceil(Math.random() * 6))
+        }
+        return newDice
     }
-    return randomNumbers;
+
+  function rollDice() {
+    setDice(allNewDice())
   }
 
   return (
     <main>
       <div className='die-container'>
-        {allNewDice.map((e, i) => <Die key={i} value={e}/>)}
+        {dice.map((e, i) => <Die key={i} value={e}/>)}
       </div>
+      <button onClick={rollDice}>Roll</button>
     </main>
   )
 }
