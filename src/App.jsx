@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import { Die } from './components/Die'
@@ -6,6 +6,7 @@ import { nanoid } from 'nanoid'
 
 function App() {
   const [dice, setDice] = useState(allNewDice())
+  const [tenzies, setTenzies] = useState(false)
     
   function allNewDice() {
     const newDice = [];
@@ -36,6 +37,19 @@ function App() {
       }
     }))
   } 
+
+  useEffect(() => {
+    let firstDie = dice[0]
+    let differentDie = dice.find(die => {
+      if(die.isHeld == false || die.value != firstDie.value) {
+        return die
+      }
+    })
+    if(!differentDie){
+      console.log("won")
+      setTenzies(prev => !prev)
+    }
+  }, [dice])
 
   return (
     <main>
