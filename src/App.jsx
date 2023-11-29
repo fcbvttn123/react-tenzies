@@ -26,7 +26,7 @@ function App() {
   return (
     <main>
       <div className='die-container'>
-        {dice.map(e => <Die key={e.id} value={e.value}/>)}
+        {dice.map(e => <Die key={e.id} value={e.value} isHeld={e.isHeld}/>)}
       </div>
       <button onClick={rollDice}>Roll</button>
     </main>
