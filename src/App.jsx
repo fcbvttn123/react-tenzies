@@ -24,7 +24,12 @@ function App() {
   }
 
   function holdDice(id) {
-    console.log(id)
+    setDice(prev => prev.map(e => {
+      return {
+        ...e, 
+        isHeld: e.id == id ? !e.isHeld : e.isHeld
+      }
+    }))
   } 
 
   return (
