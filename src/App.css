@@ -50,7 +50,7 @@ main {
 }
 
 .die-face {
-    background-color: FFFFFF;
+    background-color: #FFFFFF;
     box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
 
@@ -59,12 +59,25 @@ main {
 
     display: grid;
     place-content: center;
+
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    
     cursor: pointer;
 }
 
 .die-num {
     font-weight: 700;
     font-size: 1.2rem;
+}
+
+/* Dot */
+
+.dot {
+    width: 5px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: black;
 }
 
 /* Button - Second Child of Main section */
