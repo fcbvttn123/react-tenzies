@@ -1,14 +1,19 @@
 import { Dot } from "./Dot"
 
 export function Die(props) {
-    let styles = {
-        backgroundColor: props.isHeld ? "#59E391" : "#fff"
+    let extraStyles = {
+        backgroundColor: props.isHeld ? "#59E391" : "#fff",
+        gridTemplateColumns: props.value == 1 ? "1fr" : "1fr 1fr" 
     }
+
+    let dots = []
+    for(let i = 0; i < props.value; i++) {
+        dots.push(<Dot  key={i}/>)
+    }
+
     return (
-        <div className="die-face" style={styles} onClick={() => props.holdDice(props.id)}>
-            {/* <h2 className="die-num">{props.value}</h2> */}
-            <Dot />
-            <Dot />
+        <div className="die-face" style={extraStyles} onClick={() => props.holdDice(props.id)}>
+            {dots}
         </div>
     )
 }

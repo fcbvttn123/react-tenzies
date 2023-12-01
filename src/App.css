@@ -49,6 +49,22 @@ main {
     gap: 20px;
 }
 
+.die-face-1-dot {
+    background-color: #FFFFFF;
+    box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+
+    width: 35.84px;
+    aspect-ratio: 1/1;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
 .die-face {
     background-color: #FFFFFF;
     box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.15);
@@ -58,10 +74,9 @@ main {
     aspect-ratio: 1/1;
 
     display: grid;
-    place-content: center;
-
     grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
+    justify-items: center;
+    align-items: center;
     
     cursor: pointer;
 }

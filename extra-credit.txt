@@ -1,4 +1,4 @@
-+ CSS: put real dots on the dice. 
++ CSS: edit odd numbers of dot. 
 
 + Track the number of rolls 
 
