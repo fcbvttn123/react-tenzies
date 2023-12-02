@@ -1,7 +1,7 @@
 + CSS: edit odd numbers of dot. 
 
-+ Track the number of rolls 
++ Edit game history details: show roll numbers of every game 
 
-+ Track the time it tookt to win 
++ Track the time it took to win 
 
 + Save your best time to local storage 
