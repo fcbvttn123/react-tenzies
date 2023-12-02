@@ -2,6 +2,12 @@
 
 + Track the number of rolls 
 
-+ Track the time it tookt to win 
+    + times = 0
+
+    + One click --> ++times
+
+    + If player wins the game, it will save "times" variable into local browser
+
++ Track the time it took to win 
 
 + Save your best time to local storage 
