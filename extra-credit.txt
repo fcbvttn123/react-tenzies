@@ -1,12 +1,6 @@
 + CSS: edit odd numbers of dot. 
 
-+ Track the number of rolls 
-
-    + times = 0
-
-    + One click --> ++times
-
-    + If player wins the game, it will save "times" variable into local browser
++ Edit game history details: show roll numbers of every game 
 
 + Track the time it took to win 
 
