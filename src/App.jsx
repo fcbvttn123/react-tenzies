@@ -111,6 +111,11 @@ function App() {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }
 
+  // Get the best time to win the game 
+  let bestTime = games.length > 0 && games.reduce((lowest, current) => {
+    return Math.min(lowest, current.seconds)
+  }, games[0].seconds)
+
   return (
     <main>
 
@@ -155,6 +160,13 @@ function App() {
           <h1>
           Average Minutes to win a Game:{" "}
           {(games.reduce((acc, current) => acc + current.rollNumbers, 0) / 60).toFixed(2)}
+          </h1>
+        }
+        {
+          games.length > 0 
+          &&
+          <h1>
+          Best time to win: {bestTime}
           </h1>
         }
         <h1>Timer: {formatTime(seconds)}</h1>
