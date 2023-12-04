@@ -166,10 +166,10 @@ function App() {
           games.length > 0 
           &&
           <h1>
-          Best time to win: {bestTime}
+          Best time to win: {formatTime(bestTime)}
           </h1>
         }
-        <h1>Timer: {formatTime(seconds)}</h1>
+        <h1 className='timer'>Timer: {formatTime(seconds)}</h1>
       </div>
 
     </main>
