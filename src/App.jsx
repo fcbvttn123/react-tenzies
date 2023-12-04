@@ -80,7 +80,8 @@ function App() {
     // --> reset "roll numbers" state
     if (!differentDie) {
       setTenzies((prev) => !prev);
-      setGames((prev) => [...prev, currentRollNumber]);
+      setGames((prev) => [...prev, {rollNumbers: currentRollNumber, seconds}]);
+
       setCurrentRollNumber(0);
       setSeconds(0);
       clearInterval(intervalId)
@@ -109,10 +110,10 @@ function App() {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }
-  console.log(formatTime(seconds))
 
   return (
     <main>
+
       {tenzies && <Confetti />}
 
       <h1 className="title">Tenzies</h1>
@@ -140,11 +141,25 @@ function App() {
 
       <div className="game-history">
         <h1>Games Played: {games.length}</h1>
-        <h1>
-          Roll Numbers per Game:{" "}
-          {(games.reduce((acc, current) => acc + current, 0) / games.length).toFixed(2)}
-        </h1>
+        {
+          games.length > 0 
+          &&
+          <h1>
+          Average Roll Numbers per Game:{" "}
+          {(games.reduce((acc, current) => acc + current.rollNumbers, 0) / games.length).toFixed(2)}
+          </h1>
+        }
+        {
+          games.length > 0 
+          &&
+          <h1>
+          Average Minutes to win a Game:{" "}
+          {(games.reduce((acc, current) => acc + current.rollNumbers, 0) / 60).toFixed(2)}
+          </h1>
+        }
+        <h1>Timer: {formatTime(seconds)}</h1>
       </div>
+
     </main>
   );
 }
