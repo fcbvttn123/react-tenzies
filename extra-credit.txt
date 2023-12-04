@@ -2,6 +2,6 @@
 
 + Edit game history details: show roll numbers of every game 
 
-+ Track the time it took to win 
++ Logout time to screen 
 
 + Save your best time to local storage 

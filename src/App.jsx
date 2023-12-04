@@ -6,11 +6,17 @@ import { nanoid } from 'nanoid'
 import Confetti from 'react-confetti'
 
 function App() {
-  const [dice, setDice] = useState(allNewDice())
-  const [tenzies, setTenzies] = useState(false)
-  const [currentRollNumber, setCurrentRollNumber] = useState(0)
-  const [games, setGames] = useState(JSON.parse(localStorage.getItem("tenzies")) || [])
-    
+  const [dice, setDice] = useState(allNewDice());
+  const [tenzies, setTenzies] = useState(false);
+  const [currentRollNumber, setCurrentRollNumber] = useState(0);
+
+  const [games, setGames] = useState(
+    JSON.parse(localStorage.getItem("tenzies")) || []
+  )
+
+  const [seconds, setSeconds] = useState(0);
+  let intervalId
+
   // Create an entire new dice for the new game
   function allNewDice() {
     const newDice = [];
@@ -26,59 +32,84 @@ function App() {
 
   // New Roll + Update current Roll Number
   function rollDice() {
-    setDice(prev => prev.map(e => {
-      return {
-        ...e, 
-        value: e.isHeld ? e.value : Math.ceil(Math.random() * 6)
-      }
-    }))
-    setCurrentRollNumber(prev => ++prev)
+    setDice((prev) =>
+      prev.map((e) => {
+        return {
+          ...e,
+          value: e.isHeld ? e.value : Math.ceil(Math.random() * 6),
+        };
+      })
+    );
+    setCurrentRollNumber((prev) => ++prev);
   }
 
   // Click event for dice --> update green color for die clicked
   function holdDice(id) {
-    // If the play wins, disable the click event on all dice 
-    if(tenzies) {
-      return
+    // If the play wins, disable the click event on all dice
+    if (tenzies) {
+      return;
     }
     // Update the green color for dice clicked
-    setDice(prev => prev.map(e => {
-      return {
-        ...e, 
-        isHeld: e.id == id ? !e.isHeld : e.isHeld
-      }
-    }))
-  } 
+    setDice((prev) =>
+      prev.map((e) => {
+        return {
+          ...e,
+          isHeld: e.id == id ? !e.isHeld : e.isHeld,
+        };
+      })
+    );
+  }
 
   // Click event for "roll" button after wining the game
   function resetGame() {
-    setTenzies(false)
-    setDice(allNewDice())
+    setTenzies(false);
+    setDice(allNewDice());
   }
 
   // Check if the game is won or lost, then update "tenzies" state
   useEffect(() => {
-    let firstDie = dice[0]
-    let differentDie = dice.find(die => {
-      if(die.isHeld == false || die.value != firstDie.value) {
-        return die
+    let firstDie = dice[0];
+    let differentDie = dice.find((die) => {
+      if (die.isHeld == false || die.value != firstDie.value) {
+        return die;
       }
-    })
-    // If the player wins 
-    // --> update "tenzies" state 
+    });
+    // If the player wins
+    // --> update "tenzies" state
     // --> push "roll numbers" to "games" state
     // --> reset "roll numbers" state
-    if(!differentDie){
-      setTenzies(prev => !prev)
-      setGames(prev => [...prev, currentRollNumber])
-      setCurrentRollNumber(0)
+    if (!differentDie) {
+      setTenzies((prev) => !prev);
+      setGames((prev) => [...prev, currentRollNumber]);
+      setCurrentRollNumber(0);
+      setSeconds(0);
+      clearInterval(intervalId)
     }
-  }, [dice])
-  
-  // Save "games" state to local browser 
+  }, [dice]);
+
+  // Save "games" state to local browser
   useEffect(() => {
-    localStorage.setItem("tenzies", JSON.stringify(games))
-  }, [games])
+    localStorage.setItem("tenzies", JSON.stringify(games));
+  }, [games]);
+
+  // Set up timer
+  useEffect(() => {
+    if(tenzies) {
+      return
+    }
+    intervalId = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [tenzies]);
+
+  // Format time 
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  }
+  console.log(formatTime(seconds))
 
   return (
     <main>
@@ -103,13 +134,17 @@ function App() {
         ))}
       </div>
 
-      <button onClick={tenzies ? resetGame : rollDice}>{tenzies ? "New Game" : "Roll"}</button>
+      <button onClick={tenzies ? resetGame : rollDice}>
+        {tenzies ? "New Game" : "Roll"}
+      </button>
 
-      <div className='game-history'>
+      <div className="game-history">
         <h1>Games Played: {games.length}</h1>
-        <h1>Roll Numbers per Game: {games.reduce((acc, current) => acc + current, 0) / games.length}</h1>
+        <h1>
+          Roll Numbers per Game:{" "}
+          {(games.reduce((acc, current) => acc + current, 0) / games.length).toFixed(2)}
+        </h1>
       </div>
-      
     </main>
   );
 }
