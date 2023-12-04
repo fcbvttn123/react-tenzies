@@ -25,6 +25,8 @@ main {
     row-gap: 3rem;
     align-items: center;
     justify-content: center;
+
+    position: relative;
 }
 
 .title {
@@ -105,4 +107,19 @@ main button {
     border-radius: 5px;
 
     cursor: pointer;
+}
+
+/* Game History Section */
+
+.game-history {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: .7rem;
+}
+
+.game-history .timer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
